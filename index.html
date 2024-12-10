@@ -14,26 +14,59 @@
             background-color: #f0f0f0;
         }
         #video-container {
-            width: 100%;
-            height: 100%;
+            display: none;
+            position: relative;
+            width: 640px;
+            height: 480px;
+            border: 2px solid #ddd;
+            border-radius: 10px;
+            overflow: hidden;
         }
         #video {
             width: 100%;
             height: 100%;
+            object-fit: cover;
+        }
+        #overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            font-size: 20px;
         }
     </style>
 </head>
 <body>
     <div id="video-container">
-        <img id="video" src="http://127.0.0.1:5000/video_feed" alt="Hand Gesture Recognition">
+        <video id="video" autoplay></video>
+        <div id="overlay">No hand detected</div>
     </div>
-
     <script>
-        const video = document.getElementById('video');
-        video.addEventListener('error', (e) => {
-            console.error('Error with video feed:', e);
-            alert('Failed to load video feed. Please try again.');
-        });
+        function fetchVideoFeed() {
+            fetch('http://127.0.0.1:5000/video_feed')
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Network response was not ok');
+                    }
+                    return response.blob();
+                })
+                .then(blob => {
+                    const url = URL.createObjectURL(blob);
+                    const video = document.getElementById('video');
+                    video.src = url;
+                })
+                .catch(error => {
+                    console.error('Fetch video feed error:', error);
+                    alert('Failed to load video feed. Please check your network connection.');
+                });
+        }
+
+        setInterval(fetchVideoFeed, 100);  // Update video feed every 100ms
     </script>
 </body>
 </html>
