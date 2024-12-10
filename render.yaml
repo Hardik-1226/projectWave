@@ -2,12 +2,12 @@ services:
   - type: web
     name: gesture-control
     env: python
-    buildCommand: ""
-    startCommand: python app.py
-    plan: free
-    autoDeploy: true
-    healthCheckPath: "/"
-    envVars:
+    buildCommand: ""  # No build command for Flask apps
+    startCommand: python app.py  # Command to start your Flask app
+    plan: free  # Use Render's free tier for deployment
+    autoDeploy: true  # Enable automatic deployment on Git pushes
+    healthCheckPath: "/"  # Path to check if the app is running
+    envVars:  # Add any environment variables your app needs
       - key: FLASK_ENV
         value: production
       - key: PORT
