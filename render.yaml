@@ -1,15 +1,1 @@
-services:
-  - type: web  # Defines a web service
-    name: gesture-control  # Name of your service
-    env: python  # Specifies the environment (Python)
-    buildCommand: ""  # No special build command needed
-    startCommand: python app.py  # Command to start your app
-    autoDeploy: true  # Automatically deploy changes
-    plan: free  # Use Render's free tier
-    envVars:  # Environment variables
-      - key: FLASK_ENV
-        value: production
-    healthCheckPath: "/"  # Path Render uses to check if the app is running
-    #regions:  # Specify preferred regions (optional)
-      - oregon  # Example: US region
-
+Added Render Blueprint file
