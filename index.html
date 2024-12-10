@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hand Gesture Recognition</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f0f0f0;
+        }
+        #video-container {
+            width: 100%;
+            height: 100%;
+        }
+        #video {
+            width: 100%;
+            height: 100%;
+        }
+    </style>
+</head>
+<body>
+    <div id="video-container">
+        <img id="video" src="http://127.0.0.1:5000/video_feed" alt="Hand Gesture Recognition">
+    </div>
+
+    <script>
+        const video = document.getElementById('video');
+        video.addEventListener('error', (e) => {
+            console.error('Error with video feed:', e);
+            alert('Failed to load video feed. Please try again.');
+        });
+    </script>
+</body>
+</html>
